@@ -1,3 +1,4 @@
+
 const fs = require('fs');
 
 const filePath = process.argv[2];
@@ -10,8 +11,18 @@ fs.readFile(filePath, 'utf8', (err, data) => {
 
   try {
     const jsonData = JSON.parse(data);
-    // TODO: Perform error handling for invalid file format and missing data
+
+   
+    if (!jsonData.name || !jsonData.age) {
+      console.error('Missing required data in JSON file. Ensure the file contains both "name" and "age".');
+      return;
+    }
+
+    
+    console.log('Successfully read JSON file:', jsonData);
+
   } catch (err) {
     console.error('Invalid JSON file format. Please provide a valid JSON file.');
   }
 });
+
